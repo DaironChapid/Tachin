@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tachin</title>
+
+    <!-- Fuente Plus Jakarta Sans (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Íconos Tabler: versión fija (no @latest) para que nada cambie sin avisar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+
+    <!-- Nuestros estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Contenedor principal: un grid de 3 columnas (menú | centro | IA) -->
+    <div class="layout">
+
+        <!-- =====================================================
+             1. MENÚ LATERAL (izquierda)
+             ===================================================== -->
+        <aside class="menu">
+
+            <!-- Logo + botón para colapsar -->
+            <div class="menu-logo">
+                <img src="img/tachin-logo.svg" alt="Tachin" class="logo">
+                <button type="button" class="btn-icono" aria-label="Colapsar menú">
+                    <i class="ti ti-chevrons-left" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <!-- Buscador: el label envuelve el ícono y el input -->
+            <label class="buscador">
+                <i class="ti ti-search" aria-hidden="true"></i>
+                <input type="search" placeholder="Buscar tareas" aria-label="Buscar tareas">
+            </label>
+
+            <!-- Navegación principal -->
+            <nav class="menu-principal" aria-label="Menú principal">
+                <ul>
+                    <li>
+                        <!-- "activo" marca la página en la que estamos -->
+                        <a href="#" class="menu-link activo">
+                            <i class="ti ti-clipboard-check" aria-hidden="true"></i>
+                            Mis tareas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <i class="ti ti-inbox" aria-hidden="true"></i>
+                            Asignadas a mí
+                            <span class="contador contador-verde">3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <i class="ti ti-calendar" aria-hidden="true"></i>
+                            Próximas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <i class="ti ti-circle-check" aria-hidden="true"></i>
+                            Completadas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <i class="ti ti-chart-bar" aria-hidden="true"></i>
+                            Estadísticas
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Listas personales -->
+            <section class="menu-seccion">
+                <h2 class="menu-titulo">Personal</h2>
+                <ul>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <!-- Cuadrito de color de la lista -->
+                            <span class="cuadro cuadro-naranja"></span>
+                            Universidad
+                            <span class="contador">6</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <span class="cuadro cuadro-azul"></span>
+                            Hogar
+                            <span class="contador">3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <span class="cuadro cuadro-rosa"></span>
+                            Proyecto final
+                            <span class="contador">4</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-link menu-agregar">
+                            <i class="ti ti-plus" aria-hidden="true"></i>
+                            Nueva lista
+                        </button>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Equipos -->
+            <section class="menu-seccion">
+                <h2 class="menu-titulo">Equipos</h2>
+                <ul>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <span class="letra letra-amarilla">M</span>
+                            Marketing
+                            <span class="rol">Admin</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <span class="letra letra-azul">D</span>
+                            Diseño
+                            <span class="rol">Miembro</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-link menu-agregar">
+                            <i class="ti ti-plus" aria-hidden="true"></i>
+                            Crear equipo
+                        </button>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Todo lo de abajo del menú va en este bloque,
+                que se empuja al fondo desde el CSS -->
+            <div class="menu-abajo">
+
+                <!-- Tarjeta verde de Modo enfoque -->
+                <div class="tarjeta-enfoque">
+                    <p class="enfoque-titulo">
+                        <i class="ti ti-stopwatch" aria-hidden="true"></i>
+                        Modo enfoque
+                    </p>
+                    <p class="enfoque-tiempo">25:00</p>
+                    <button type="button" class="btn-blanco">Empezar sesión</button>
+                </div>
+
+                <ul>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>
+                            Configuración
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link">
+                            <i class="ti ti-help-circle" aria-hidden="true"></i>
+                            Ayuda
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tarjeta del usuario -->
+                <button type="button" class="usuario">
+                    <span class="avatar avatar-grande avatar-durazno">DA</span>
+                    <span class="usuario-texto">
+                        <strong>Dairon</strong>
+                        <small>Admin · Marketing</small>
+                    </span>
+                    <i class="ti ti-chevron-up" aria-hidden="true"></i>
+                </button>
+            </div>
+        </aside>
+
+
+        <!-- =====================================================
+            2. ENCABEZADO (arriba al centro)
+            ===================================================== -->
+        <header class="encabezado panel">
+            <div>
+                <h1>¡Buenos días, Dairon!</h1>
+                <p class="texto-suave">¿Cuál es tu plan para hoy? · Martes, 22 de septiembre</p>
+            </div>
+
+            <div class="encabezado-botones">
+                <button type="button" class="btn btn-borde">
+                    <i class="ti ti-stopwatch" aria-hidden="true"></i>
+                    Modo enfoque
+                </button>
+                <button type="button" class="btn btn-verde">
+                    <i class="ti ti-plus" aria-hidden="true"></i>
+                    Nueva tarea
+                </button>
+            </div>
+        </header>
+
+
+        <!-- =====================================================
+            3. CONTENIDO (centro): pestañas, progreso y tareas
+            ===================================================== -->
+        <main class="contenido panel">
+
+            <!-- Pestañas + botón filtrar -->
+            <div class="barra-superior">
+                <div class="pestanas">
+                    <button type="button" class="pestana activa">Hoy</button>
+                    <button type="button" class="pestana">Próximas</button>
+                    <button type="button" class="pestana">Completadas</button>
+                </div>
+
+                <button type="button" class="btn btn-borde btn-pequeno">
+                    <i class="ti ti-filter" aria-hidden="true"></i>
+                    Filtrar
+                </button>
+            </div>
+
+            <!-- Progreso del día -->
+            <div class="progreso">
+                <div class="progreso-texto">
+                    <strong>Progreso de hoy</strong>
+                    <strong>2 de 7 tareas</strong>
+                </div>
+                <!-- La barra es un div gris con otro div verde adentro.
+                    El ancho del verde es el porcentaje avanzado. -->
+                <div class="progreso-barra">
+                    <div class="progreso-relleno"></div>
+                </div>
+            </div>
+
+            <!-- ---------- Mis tareas ---------- -->
+            <section class="grupo-tareas">
+                <h2 class="grupo-titulo">
+                    Mis tareas <span class="contador contador-gris">4</span>
+                </h2>
+
+                <ul class="lista-tareas">
+                    <li class="tarea">
+                        <input type="checkbox" aria-label="Marcar como hecha">
+                        <div class="tarea-texto">
+                            <p class="tarea-nombre">Leer capítulo 4 de Estadística</p>
+                            <p class="tarea-info"><span class="cuadro cuadro-naranja"></span> Universidad · 10:00 a. m.</p>
+                        </div>
+                        <span class="prioridad prioridad-alta">Alta</span>
+                        <button type="button" class="btn-icono" aria-label="Más opciones">
+                            <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                        </button>
+                    </li>
+
+                    <li class="tarea">
+                        <input type="checkbox" aria-label="Marcar como hecha">
+                        <div class="tarea-texto">
+                            <p class="tarea-nombre">Terminar la maqueta del menú</p>
+                            <p class="tarea-info"><span class="cuadro cuadro-rosa"></span> Proyecto final · 3:00 p. m.</p>
+                        </div>
+                        <span class="prioridad prioridad-media">Media</span>
+                        <button type="button" class="btn-icono" aria-label="Más opciones">
+                            <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                        </button>
+                    </li>
+
+                    <li class="tarea">
+                        <input type="checkbox" aria-label="Marcar como hecha">
+                        <div class="tarea-texto">
+                            <p class="tarea-nombre">Pagar el recibo de internet</p>
+                            <p class="tarea-info"><span class="cuadro cuadro-azul"></span> Hogar · Hoy</p>
+                        </div>
+                        <span class="prioridad prioridad-baja">Baja</span>
+                        <button type="button" class="btn-icono" aria-label="Más opciones">
+                            <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                        </button>
+                    </li>
+
+                    <!-- Tarea terminada: "checked" en el input y clase "hecha" para tacharla -->
+                    <li class="tarea hecha">
+                        <input type="checkbox" aria-label="Marcar como hecha" checked>
+                        <div class="tarea-texto">
+                            <p class="tarea-nombre">Revisar correos pendientes</p>
+                            <p class="tarea-info"><span class="cuadro cuadro-azul"></span> Hogar · 8:00 a. m.</p>
+                        </div>
+                        <span class="prioridad prioridad-baja">Baja</span>
+                        <button type="button" class="btn-icono" aria-label="Más opciones">
+                            <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+
+                <button type="button" class="agregar-tarea">
+                    <i class="ti ti-plus" aria-hidden="true"></i>
+                    Agregar tarea
+                </button>
+            </section>
+
+            <!-- ---------- Del equipo ---------- -->
+            <section class="grupo-tareas">
+                <h2 class="grupo-titulo">
+                    Del equipo <span class="contador contador-gris">3</span>
+                </h2>
+
+                <ul class="lista-tareas">
+                    <li class="tarea">
+                        <input type="checkbox" aria-label="Marcar como hecha">
+                        <div class="tarea-texto">
+                            <p class="tarea-nombre">Preparar informe de campaña</p>
+                            <p class="tarea-info"><span class="cuadro cuadro-naranja"></span> Marketing · Asignada por Laura</p>
+                        </div>
+                        <span class="avatar avatar-verde" title="Laura M.">LM</span>
+                        <span class="prioridad prioridad-alta">Alta</span>
+                        <button type="button" class="btn-icono" aria-label="Más opciones">
+                            <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                        </button>
+                    </li>
+
+                    <li class="tarea">
+                        <input type="checkbox" aria-label="Marcar como hecha">
+                        <div class="tarea-texto">
+                            <p class="tarea-nombre">Revisar publicaciones de la semana</p>
+                            <p class="tarea-info"><span class="cuadro cuadro-naranja"></span> Marketing · Asignada por Andrés</p>
+                        </div>
+                        <span class="avatar avatar-morado" title="Andrés R.">AR</span>
+                        <span class="prioridad prioridad-media">Media</span>
+                        <button type="button" class="btn-icono" aria-label="Más opciones">
+                            <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                        </button>
+                    </li>
+
+                    <li class="tarea hecha">
+                        <input type="checkbox" aria-label="Marcar como hecha" checked>
+                        <div class="tarea-texto">
+                            <p class="tarea-nombre">Enviar bocetos al cliente</p>
+                            <p class="tarea-info"><span class="cuadro cuadro-azul-oscuro"></span> Diseño · Asignada por Sofía</p>
+                        </div>
+                        <span class="avatar avatar-rosa" title="Sofía C.">SC</span>
+                        <span class="prioridad prioridad-media">Media</span>
+                        <button type="button" class="btn-icono" aria-label="Más opciones">
+                            <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+
+                <button type="button" class="agregar-tarea">
+                    <i class="ti ti-plus" aria-hidden="true"></i>
+                    Agregar tarea
+                </button>
+            </section>
+        </main>
+
+
+        <!-- =====================================================
+            4. ASISTENTE IA (derecha)
+            ===================================================== -->
+        <aside class="ia panel">
+
+            <!-- Cabecera del panel -->
+            <div class="ia-cabecera">
+                <span class="ia-icono">
+                    <i class="ti ti-sparkles" aria-hidden="true"></i>
+                </span>
+                <div>
+                    <h2 class="ia-titulo">Asistente IA</h2>
+                    <p class="texto-suave texto-pequeno">Organiza, resume y planea contigo</p>
+                </div>
+                <button type="button" class="btn-icono" aria-label="Cerrar asistente">
+                    <i class="ti ti-x" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <!-- Zona del chat (caja gris) -->
+            <div class="ia-chat">
+                <!-- Círculo verde con la estrellita -->
+                <span class="ia-circulo">
+                    <i class="ti ti-sparkles" aria-hidden="true"></i>
+                </span>
+
+                <p class="texto-suave">Hola, Dairon</p>
+                <p class="ia-pregunta">¿En qué te ayudo hoy?</p>
+                <p class="texto-suave texto-pequeno">
+                    Puedo ordenar tus tareas, dividirlas en pasos o decirte qué vence pronto.
+                </p>
+
+                <!-- Sugerencias -->
+                <div class="sugerencias">
+                    <button type="button" class="sugerencia">Organiza mis tareas de hoy por prioridad</button>
+                    <button type="button" class="sugerencia">Divide “Proyecto final” en pasos</button>
+                    <button type="button" class="sugerencia">¿Qué tareas vencen esta semana?</button>
+                </div>
+            </div>
+
+            <!-- Caja para escribir el mensaje -->
+            <form class="ia-mensaje" action="#">
+                <input type="text" placeholder="Pregúntale algo a la IA…" aria-label="Mensaje para la IA">
+                <button type="submit" class="btn-enviar" aria-label="Enviar">
+                    <i class="ti ti-arrow-up" aria-hidden="true"></i>
+                </button>
+            </form>
+        </aside>
+
+    </div>
+
+</body>
+</html>

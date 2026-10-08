@@ -1,0 +1,758 @@
+/* =========================================================
+   TACHIN - Estilos
+   Orden del archivo:
+   1. Variables (colores)
+   2. Reset y base
+   3. Layout (grid de 3 columnas)
+   4. Cosas que se repiten (botones, contadores, avatares...)
+   5. Menú lateral
+   6. Encabezado
+   7. Contenido (tareas)
+   8. Asistente IA
+   9. Responsive (pantallas pequeñas)
+   ========================================================= */
+
+
+/* ---------- 1. VARIABLES ----------
+   Guardamos los colores una sola vez. Si quieres cambiar el verde,
+   lo cambias aquí y cambia en toda la página. */
+:root {
+    --verde: #1B7F43;
+    --verde-claro: #E3F2E7;
+    --fondo: #EEF3EE;          /* fondo de la página */
+    --gris-panel: #F3F5F2;     /* cajas grises dentro de los paneles */
+    --blanco: #FFFFFF;
+    --borde: #E2E6E2;
+    --texto: #1A1F1B;
+    --texto-suave: #6B716C;
+
+    --naranja: #F59E0B;
+    --azul: #0EA5E9;
+    --azul-oscuro: #3B82F6;
+    --rosa: #EC4899;
+}
+
+
+/* ---------- 2. RESET Y BASE ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+    font-size: 14px;
+    color: var(--texto);
+    background-color: var(--fondo);
+}
+
+/* Los botones e inputs no heredan la fuente solos, se lo pedimos */
+button, input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;   /* quitamos las viñetas de todas las listas */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* ---------- 3. LAYOUT ----------
+Grid de 3 columnas y 2 filas:
+- el menú y la IA ocupan las 2 filas (toda la altura)
+   - en el centro: arriba el encabezado, abajo el contenido */
+.layout {
+    display: grid;
+    grid-template-columns: 240px 1fr 300px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "menu encabezado ia"
+        "menu contenido  ia";
+    gap: 14px;
+    padding: 14px;
+    min-height: 100vh;
+}
+
+.menu       { grid-area: menu; }
+.encabezado { grid-area: encabezado; }
+.contenido  { grid-area: contenido; }
+.ia         { grid-area: ia; }
+
+/* Todos los paneles blancos se ven igual */
+.panel {
+    background-color: var(--blanco);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+
+/* ---------- 4. COSAS QUE SE REPITEN ---------- */
+
+/* Textos auxiliares */
+.texto-suave {
+    color: var(--texto-suave);
+}
+
+.texto-pequeno {
+    font-size: 12px;
+}
+
+/* Botón normal (con ícono + texto) */
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;   /* evita que el texto del botón se parta en dos líneas */
+}
+
+.btn .ti {
+    font-size: 18px;
+}
+
+.btn-verde {
+    background-color: var(--verde);
+    color: var(--blanco);
+    border: 1px solid var(--verde);
+}
+
+.btn-verde:hover {
+    background-color: #166B38;
+}
+
+.btn-borde {
+    background-color: var(--blanco);
+    border: 1px solid var(--borde);
+}
+
+.btn-borde:hover {
+    background-color: var(--gris-panel);
+}
+
+.btn-pequeno {
+    padding: 8px 12px;
+    font-weight: 500;
+}
+
+/* Botón que solo tiene un ícono (colapsar, cerrar, tres puntos) */
+.btn-icono {
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+    border-radius: 8px;
+    color: var(--texto-suave);
+    font-size: 18px;
+}
+
+.btn-icono:hover {
+    background-color: var(--gris-panel);
+}
+
+/* Numeritos a la derecha (6, 3, 4...) */
+.contador {
+    margin-left: auto;   /* margin-left: auto empuja el elemento a la derecha */
+    font-size: 12px;
+    color: var(--texto-suave);
+}
+
+.contador-verde {
+    background-color: var(--verde-claro);
+    color: var(--verde);
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 10px;
+}
+
+.contador-gris {
+    margin-left: 6px;
+    background-color: var(--gris-panel);
+    padding: 1px 8px;
+    border-radius: 10px;
+}
+
+/* Cuadritos de color de cada lista */
+.cuadro {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+}
+
+.cuadro-naranja     { background-color: var(--naranja); }
+.cuadro-azul        { background-color: var(--azul); }
+.cuadro-azul-oscuro { background-color: var(--azul-oscuro); }
+.cuadro-rosa        { background-color: var(--rosa); }
+
+/* Círculos con iniciales (LM, AR, SC, DA) */
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;    /* 50% = círculo perfecto */
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.avatar-grande {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+}
+
+.avatar-verde   { background-color: var(--verde-claro); color: var(--verde); }
+.avatar-morado  { background-color: #E0E7FF; color: #4338CA; }
+.avatar-rosa    { background-color: #FCE7F3; color: #BE185D; }
+.avatar-durazno { background-color: #FDE3D6; color: #B42318; }
+
+
+/* ---------- 5. MENÚ LATERAL ---------- */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--blanco);
+    border-radius: 20px;
+    padding: 16px 12px;
+}
+
+.menu-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /* logo a la izquierda, botón a la derecha */
+    padding: 0 6px;
+}
+
+.logo {
+    height: 30px;
+    width: auto;
+}
+
+/* Buscador */
+.buscador {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background-color: var(--gris-panel);
+    color: var(--texto-suave);
+}
+
+.buscador input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+/* Como le quitamos el outline al input, marcamos el foco en la caja entera */
+.buscador:focus-within {
+    outline: 2px solid var(--verde);
+}
+
+/* Caja gris del menú principal */
+.menu-principal {
+    background-color: var(--gris-panel);
+    border-radius: 14px;
+    padding: 6px;
+}
+
+/* Cada opción del menú (sirve para <a> y para <button>) */
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    text-align: left;
+}
+
+.menu-link .ti {
+    font-size: 18px;
+    color: var(--texto-suave);
+}
+
+.menu-link:hover {
+    background-color: var(--gris-panel);
+}
+
+/* Dentro de la caja gris, el hover debe ser blanco para que se note */
+.menu-principal .menu-link:hover {
+    background-color: var(--blanco);
+}
+
+/* Opción activa (Mis tareas) */
+.menu-link.activo {
+    background-color: var(--blanco);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.menu-link.activo .ti {
+    color: var(--verde);
+}
+
+/* Secciones "Personal" y "Equipos" */
+.menu-titulo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;   /* lo escribimos normal y el CSS lo pone en mayúsculas */
+    color: var(--texto-suave);
+    padding: 0 10px 6px;
+}
+
+.menu-agregar {
+    color: var(--texto-suave);
+}
+
+/* Cuadrito con letra (M, D) de los equipos */
+.letra {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.letra-amarilla { background-color: #FEF3C7; color: #92400E; }
+.letra-azul     { background-color: #DBEAFE; color: #1D4ED8; }
+
+/* Etiqueta gris "Admin" / "Miembro" */
+.rol {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--texto-suave);
+    background-color: var(--gris-panel);
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+/* Bloque de abajo: margin-top: auto lo empuja al final del menú */
+.menu-abajo {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tarjeta verde de Modo enfoque */
+.tarjeta-enfoque {
+    background-color: var(--verde);
+    color: var(--blanco);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.enfoque-titulo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+}
+
+.enfoque-tiempo {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 4px 0 10px;
+}
+
+.btn-blanco {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--blanco);
+    color: var(--verde);
+    font-weight: 700;
+}
+
+.btn-blanco:hover {
+    background-color: var(--verde-claro);
+}
+
+/* Tarjeta del usuario */
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    background-color: var(--blanco);
+    text-align: left;
+}
+
+.usuario:hover {
+    background-color: var(--gris-panel);
+}
+
+.usuario-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.usuario-texto small {
+    color: var(--texto-suave);
+    font-size: 12px;
+}
+
+.usuario .ti {
+    margin-left: auto;
+    color: var(--texto-suave);
+}
+
+
+/* ---------- 6. ENCABEZADO ---------- */
+.encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   /* texto a la izquierda, botones a la derecha */
+    gap: 16px;
+}
+
+.encabezado h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.encabezado-botones {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* ---------- 7. CONTENIDO (TAREAS) ---------- */
+.contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Fila de pestañas + filtrar */
+.barra-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pestanas {
+    display: flex;
+    gap: 4px;
+    background-color: var(--gris-panel);
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.pestana {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 9px;
+    background-color: transparent;
+    color: var(--texto-suave);
+}
+
+.pestana.activa {
+    background-color: var(--blanco);
+    color: var(--texto);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Caja verde de progreso */
+.progreso {
+    background-color: var(--verde-claro);
+    color: var(--verde);
+    border-radius: 14px;
+    padding: 14px 16px;
+}
+
+.progreso-texto {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.progreso-barra {
+    height: 6px;
+    background-color: var(--blanco);
+    border-radius: 6px;
+}
+
+.progreso-relleno {
+    width: 28%;          /* 2 de 7 tareas ≈ 28% */
+    height: 100%;
+    background-color: var(--verde);
+    border-radius: 6px;
+}
+
+/* Grupo "Mis tareas" / "Del equipo" */
+.grupo-titulo {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.lista-tareas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Cada tarea es una fila: [check] [texto] [avatar] [prioridad] [⋮] */
+.tarea {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background-color: var(--gris-panel);
+    border-radius: 12px;
+}
+
+/* accent-color pinta el checkbox del navegador con nuestro verde */
+.tarea input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--verde);
+    cursor: pointer;
+}
+
+/* flex: 1 hace que el texto ocupe todo el espacio sobrante,
+   así la prioridad y los tres puntos quedan pegados a la derecha */
+.tarea-texto {
+    flex: 1;
+}
+
+.tarea-nombre {
+    font-weight: 600;
+}
+
+.tarea-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--texto-suave);
+    margin-top: 2px;
+}
+
+/* Tarea terminada: título tachado y gris */
+.tarea.hecha .tarea-nombre {
+    text-decoration: line-through;
+    color: var(--texto-suave);
+}
+
+/* Etiqueta de prioridad (Alta / Media / Baja) */
+.prioridad {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+}
+
+/* El puntito antes del texto: "● Alta" */
+.prioridad::before {
+    content: "● ";
+    font-size: 9px;
+}
+
+.prioridad-alta  { background-color: #FDECEC; color: #C62828; }
+.prioridad-media { background-color: #FFF1E3; color: #C2570C; }
+.prioridad-baja  { background-color: var(--verde-claro); color: var(--verde); }
+
+/* Botón "+ Agregar tarea" */
+.agregar-tarea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    color: var(--texto-suave);
+}
+
+.agregar-tarea:hover {
+    background-color: var(--gris-panel);
+}
+
+
+/* ---------- 8. ASISTENTE IA ---------- */
+.ia {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.ia-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* El botón de cerrar se va a la derecha */
+.ia-cabecera .btn-icono {
+    margin-left: auto;
+}
+
+.ia-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: var(--verde-claro);
+    color: var(--verde);
+    font-size: 18px;
+}
+
+.ia-titulo {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Caja gris del chat: flex: 1 hace que crezca y ocupe todo el alto libre */
+.ia-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px 16px;
+    background-color: var(--gris-panel);
+    border-radius: 16px;
+    text-align: center;
+}
+
+/* Círculo verde con borde verde claro (el borde hace el "halo") */
+.ia-circulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--verde);
+    border: 8px solid var(--verde-claro);
+    color: var(--blanco);
+    font-size: 20px;
+    margin-bottom: 12px;
+    box-sizing: content-box;   /* para que el borde se sume al tamaño y no lo achique */
+}
+
+.ia-pregunta {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.sugerencias {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: 14px;
+}
+
+.sugerencia {
+    padding: 10px 12px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background-color: var(--blanco);
+    text-align: left;
+    font-size: 13px;
+}
+
+.sugerencia:hover {
+    border-color: var(--verde);
+}
+
+/* Caja para escribir */
+.ia-mensaje {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 6px 6px 14px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+}
+
+.ia-mensaje:focus-within {
+    border-color: var(--verde);
+}
+
+.ia-mensaje input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.btn-enviar {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--verde);
+    color: var(--blanco);
+    font-size: 18px;
+}
+
+
+/* ---------- 9. RESPONSIVE ----------
+   En pantallas de menos de 1000px ponemos todo en una sola columna,
+   uno debajo del otro. */
+@media (max-width: 1000px) {
+    .layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "encabezado"
+            "contenido"
+            "ia"
+            "menu";
+    }
+
+    .encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Si no caben las pestañas y el botón Filtrar, el botón baja a otra línea */
+    .barra-superior {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .ia-chat {
+        min-height: 400px;
+    }
+}
